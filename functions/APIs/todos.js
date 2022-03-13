@@ -82,3 +82,22 @@ exports.deleteTodo = (request, response) => {
     return response.status(500).json({ error: err.code });
   });
 };
+
+// * Edit a ToDo
+
+exports.editTodo = ( request, response ) => {
+  if(request.body.todoId || request.body.createdAt){
+    response.status(403).json({message: 'Not allowed to edit'});
+  }
+  let document = db.collection('todos').doc(`${request.params.todoId}`);
+  document.update(request.body)
+  .then(()=> {
+    response.json({message: 'Updated successfully'});
+  })
+  .catch((err) => {
+    console.error(err);
+    return response.status(500).json({
+      error: err.code
+    });
+  });
+};

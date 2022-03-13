@@ -5,7 +5,8 @@ const app = require('express')();
 const {
   getAllTodos,
   postOneTodo,
-  deleteTodo
+  deleteTodo,
+  editTodo
 } = require('./APIs/todos')
 
 // Map incoming GET requests on /todos to `getAllTodos`
@@ -16,6 +17,9 @@ app.post('/todos', postOneTodo);
 
 // Map incoming DELETE requests on /todos to `deleteTodo`
 app.delete('/todos/:todoId', deleteTodo);
+
+// Map incoming PUT requests on /todos to `editTodo`
+app.put('/todos/:todoId', editTodo);
 
 // Export a function `api`. When triggered, pass to `app`
 exports.api = functions.https.onRequest(app);
