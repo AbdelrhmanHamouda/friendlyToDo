@@ -84,7 +84,6 @@ exports.deleteTodo = (request, response) => {
 };
 
 // * Edit a ToDo
-
 exports.editTodo = ( request, response ) => {
   if(request.body.todoId || request.body.createdAt){
     response.status(403).json({message: 'Not allowed to edit'});
